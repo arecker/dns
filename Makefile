@@ -1,4 +1,4 @@
-PROJECTS = astuary bob blog family wedding
+PROJECTS = astuary bob blog family tranquility wedding
 SECRETS = secrets/aws-access-key-id secrets/aws-secret-key secrets/cloudflare-email secrets/cloudflare-token
 PROJECT_CONFIGS = $(addsuffix /config.tf, $(PROJECTS))
 
