@@ -1,6 +1,5 @@
 locals {
-  cloudflare_cname = "blog-8pr.pages.dev"
-  github_cname     = "arecker.github.io"
+  github_cname  = "arecker.github.io"
 }
 
 resource "cloudflare_zone" "zone" {
@@ -10,19 +9,16 @@ resource "cloudflare_zone" "zone" {
 resource "cloudflare_record" "apex" {
   zone_id = cloudflare_zone.zone.id
   name    = "@"
-  value   = local.cloudflare_cname
+  value   = "apex-loadbalancer.netlify.com"
   type    = "CNAME"
-  proxied = true
-  ttl     = 1
 }
 
 resource "cloudflare_record" "www" {
   zone_id = cloudflare_zone.zone.id
   name    = "www"
-  value   = local.cloudflare_cname
+  value   = "arecker-blog.netlify.com"
   type    = "CNAME"
-  ttl     = 1
-  proxied = true
+  ttl     = 300
 }
 
 resource "cloudflare_record" "demo" {
@@ -44,4 +40,3 @@ resource "cloudflare_record" "archive" {
 output "blog_nameservers" {
   value = cloudflare_zone.zone.name_servers
 }
-
