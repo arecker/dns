@@ -40,6 +40,13 @@ resource "cloudflare_record" "verify" {
   value   = "verify.squarespace.com"
 }
 
+module "email" {
+  source               = "../modules/privateemail"
+  cloudflare_zone_id   = cloudflare_zone.zone.id
+  cloudflare_zone_name = cloudflare_zone.zone.zone
+}
+
+
 output "nameservers" {
   value = cloudflare_zone.zone.name_servers
 }
